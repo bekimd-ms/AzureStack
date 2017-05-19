@@ -1,9 +1,3 @@
-Param(
-  [string]$dns,
-  [string]$user, 
-  [string]$pwd
-)
-
 Write-host "Downloading tools..."
 $path = ".\AzureStack-Tools-master\"
 if( Test-Path -Path  $path ) { rmdir -Path $path -Recurse }
@@ -18,15 +12,3 @@ Use-AzureRmProfile -Profile "2017-03-09-profile" -Force
 Write-host "Installing azure stack modules"
 Install-Module -Name AzureStack -RequiredVersion 1.2.9 -Force
 
-Write-host "Creating environment..."
-Import-Module ".\AzureStack-Tools-master\Connect\AzureStack.Connect.psm1"
-
-$env = "AzureStackTenant"
-Add-AzureStackAzureRmEnvironment -Name $env -ArmEndpoint ("https://management." + $dns) 
-
-$secret = convertto-securestring -String $pwd -AsPlainText -Force
-$cred = new-object -typename System.Management.Automation.PSCredential -argumentlist $user, $secret
-
-Write-Host "Logging in..."
-
-Login-AzureRMAccount -EnvironmentName $env -Credential $cred

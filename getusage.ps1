@@ -14,4 +14,3 @@ $usage = Get-UsageAggregates -ReportedStartTime $starttime -ReportedEndTime $end
 
 $agg = $usage[0].UsageAggregations.Properties | select MeterId, Quantity, UsageEndTime, UsageStartTime, InstanceData
 
-$agg 

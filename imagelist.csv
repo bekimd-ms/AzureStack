@@ -1,0 +1,5 @@
+"Publisher","Offer","SKU","Version","Type","URI"
+"Canonical","UbuntuServer","14.04.3-LTS","1.0.0","Linux","https://masimages.blob.core.windows.net/images/ubuntu-14.04-LTS-microsoft_azure_stack-20170225-10.vhd"
+"Canonical","UbuntuServer","16.04-LTS","1.0.0","Linux","https://masimages.blob.core.windows.net/images/ubuntu-16.04-server-cloudimg-amd64-disk1.vhd"
+"MicrosoftWindowsServer","WindowsServer","2012-R2-Datacenter","1.0.0","Windows","https://masimages.blob.core.windows.net/images/WindowsServer2012R2DatacenterEval.vhd"
+"MicrosoftWindowsServer","WindowsServer","2016-Datacenter","1.0.0","Windows","https://masimages.blob.core.windows.net/images/WindowsServer2016DatacenterEval.vhd"

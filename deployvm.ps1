@@ -9,6 +9,7 @@ Param(
 )
 Write-Host "Creating resource group..."
 
+
 new-azurermresourcegroup -name $rgname -location $location
 $password = "1Add*Pass"
 $secret = convertto-securestring -String $password -AsPlainText -Force

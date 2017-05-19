@@ -1,6 +1,4 @@
-Param(
-  [string]$location="local"
-)
+$location = $env:LOCATION
 
 $rgname = "system." + $location
 $farm = Get-ACSFarm -ResourceGroupName $rgname
