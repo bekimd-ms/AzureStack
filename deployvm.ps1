@@ -5,7 +5,7 @@ Param(
   [string]$disksize,
   [string]$vnet = "",
   [string]$vnetrg = "",
-  [string]$location = "local"
+  [string]$location = $env:LOCATION
 )
 Write-Host "Creating resource group..."
 

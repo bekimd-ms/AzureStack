@@ -1,14 +1,10 @@
 Param(
-  [string]$state=""
+  [string]$state="",
+  [string]$subname=""
 )
 
-$subs = get-azurermsubscription 
-foreach( $sub in $subs )
+function GetSubVms( $state )
 {
-   Write-Host
-   Write-Host $sub.SubscriptionName
-
-   $s = select-azurermsubscription -SubscriptionId $sub.SubscriptionId
    if( $state -eq "" )
    {
       $vms = ( get-azurermvm ) 
@@ -23,4 +19,24 @@ foreach( $sub in $subs )
    {
      Write-Host $vm.Name $vm.ProvisioningState $vm.StorageProfile.OSDisk.Vhd.Uri 
    }
+
+}
+
+if( $subname -eq "" ) 
+{
+  $subs = get-azurermsubscription 
+  foreach( $sub in $subs )
+  {
+     Write-Host
+     Write-Host $sub.SubscriptionName
+     select-azurermsubscription -SubscriptionId $sub.SubscriptionId
+     GetSubVms $state
+  }
+}
+else
+{
+  Write-Host
+  Write-Host $subname
+  select-azurermsubscription -SubscriptionName $subname
+  GetSubVms $state
 }

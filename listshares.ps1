@@ -4,4 +4,4 @@ $rgname = "system." + $location
 $farm = Get-ACSFarm -ResourceGroupName $rgname
 $shares = Get-ACSShare -ResourceGroupName $rgname -FarmName $farm.FarmName
 
-$shares | Format-Table
+$shares | select ShareName, HealthStatus, TotalCapacity, UsedCapacity, FreeCapacity | format-table
