@@ -1,7 +1,3 @@
-$location = $env:LOCATION
-
-$rgname = "system." + $location
-$farm = Get-ACSFarm -ResourceGroupName $rgname
-$shares = Get-ACSShare -ResourceGroupName $rgname -FarmName $farm.FarmName
-
-$shares | select ShareName, HealthStatus, TotalCapacity, UsedCapacity, FreeCapacity | format-table
+Get-AzSStorageShare `
+  | select ShareName, HealthStatus, TotalCapacity, UsedCapacity, FreeCapacity `
+  | format-table

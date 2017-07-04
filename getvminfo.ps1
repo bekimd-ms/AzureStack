@@ -7,8 +7,6 @@ foreach( $node in $nodes )
   $vm += @(get-vm -ComputerName $node.Name)
 }
 
-$vm
-
 $vm | select ComputerName, Name, Notes, State, Path, ConfigurationLocation, `
              CheckpointFileLocation, DynamicMemoryEnabled, MemoryStartup, `
              MemoryMinimum, MemoryMaximum `
