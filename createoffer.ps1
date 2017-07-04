@@ -1,22 +1,26 @@
-Param(
-  [string]$username,
-  [string]$password,
-  [string]$location="local"
-)
+$location = "local"
+$planName = "basic" 
+$offerName = "basic" 
+$rgname = "plansoffers" 
 
-if( $username -eq "" )
-{
-    $username = $env:USER + "@" + $env:DIRECTORY
-    $password = $env:PASSWORD
-    $location = $env:LOCATION    
-}
+New-AzureRmResourceGroup -Name plansoffers -Location $location
 
-$environment = $location
+$subid = (Get-AzureRMSubscription).SubscriptionId
 
-Import-Module .\AzureStack-Tools\ServiceAdmin\AzureStack.ServiceAdmin.psm1
-$tenId = (Get-AzureRmSubscription).TenantId
-$secret = convertto-securestring -String $password -AsPlainText -Force
-$cred = new-object -typename System.Management.Automation.PSCredential -argumentlist $username, $secret
+$QuotaIds = 
+     "/subscriptions/$subid/providers/Microsoft.Compute.Admin/locations/local/quotas/Default Quota",
+     "/subscriptions/$subid/providers/Microsoft.Network.Admin/locations/local/quotas/Default Quota",
+     "/subscriptions/$subid/providers/Microsoft.Storage.Admin/locations/local/quotas/Default Quota",
+     "/subscriptions/$subid/providers/Microsoft.KeyVault.Admin/locations/local/quotas/Unlimited"
 
-New-AzSTenantOfferAndQuotas -Name xxl -Location $location -EnvironmentName $environment -TenantId $tenId -azureStackCredential $cred 
+Write-Host "Creating a new plan..."
+$plan = New-AzsPlan -Name $planName -DisplayName $planName -QuotaIds $QuotaIds -ArmLocation $location -ResourceGroupName $rgname 
+Write-Host "New plan created..."
+$plan 
+
+Write-Host "Creating a new offer..."
+$offer = New-AzsOffer -Name $offerName -DisplayName $offerName -State Public -BasePlanIds $plan.id -ArmLocation $location -ResourceGroupName $rgname
+Write-Host "New offer created..."
+$offer 
+
 
