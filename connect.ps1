@@ -1,5 +1,5 @@
 Import-Module AzureRM -RequiredVersion 1.2.10
-Import-Module .\AzureStack-Tools\Connect\AzureStack.Connect.psm1
+#Import-Module .\AzureStack-Tools\Connect\AzureStack.Connect.psm1
 
 $environment = $env:LOCATION
 $endpoint = "https://" + $env:ENDPOINT + "management." + $env:LOCATION + "." + $env:DNS
@@ -7,12 +7,10 @@ $endpoint = "https://" + $env:ENDPOINT + "management." + $env:LOCATION + "." + $
 Write-Host "Adding Environment: " $environment ":" $endpoint
 Add-AzureRmEnvironment -Name $environment -ArmEndpoint $endpoint
 
-$tenantId = Get-AzsDirectoryTenantId  -AADTenantName $env:DIRECTORY -EnvironmentName $environment
-
 if( $env:USER -eq $Null )
 {
   $user = ""
-  Login-AzureRMAccount -EnvironmentName $environment -TenantId $tenantId 
+  Login-AzureRMAccount -EnvironmentName $environment -TenantId $env:DIRECTORY
 }
 else
 {

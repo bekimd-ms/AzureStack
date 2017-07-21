@@ -8,7 +8,7 @@ Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 Install-Module -Name AzureRm.BootStrapper -Scope CurrentUser -force
 Use-AzureRmProfile -Profile "2017-03-09-profile" -Force
 Write-host "Installing azure stack modules"
-Install-Module -Name AzureStack -RequiredVersion 1.2.9 -Force
+Install-Module -Name AzureStack -RequiredVersion 1.2.10 -Force
 
 Invoke-webrequest -URI "https://github.com/Azure/AzureStack-Tools/archive/master.zip" -outfile "master.zip"
 Expand-Archive ".\master.zip" -DestinationPath .
