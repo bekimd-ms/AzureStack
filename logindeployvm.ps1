@@ -30,7 +30,7 @@ Select-AzureRMSubscription -SubscriptionName $sub
 Write-Host "Creating resource group..."
 
 new-azurermresourcegroup -name $rgname -location $location
-$password = "1Add*Pass"
+$password = ""
 $secret = convertto-securestring -String $password -AsPlainText -Force
 
 if( $vnet -eq "" ) 
