@@ -1,3 +1,6 @@
 Get-AzSStorageShare `
-  | select ShareName, HealthStatus, TotalCapacity, UsedCapacity, FreeCapacity `
+  | select ShareName, HealthStatus, `
+           @{Name="TotalGB";Expression={[math]::Round($_.TotalCapacity/1GB,2)}}, `
+           @{Name="UsedGB";Expression={[math]::Round($_.UsedCapacity/1GB,2)}}, `
+           @{Name="FreeGB";Expression={[math]::Round($_.FreeCapacity/1GB,2)}} `
   | format-table

@@ -2,8 +2,8 @@ Param(
   [string]$rgname,
   [string]$vmsize,
   [string]$password,
-  [string]$storageType,
-  [string]$disknum, 
+  [string]$storageType = "Standard_LRS",
+  [string]$disknum = 0, 
   [string]$disksize,
   [string]$vnet = "",
   [string]$vnetrg = "",
@@ -22,10 +22,10 @@ if( $vnet -eq "" )
      Write-Host "Template: " $template 
  
 
-     Write-Host "Deploying template..."
+     Write-Host "Deploying template in " $rgname "..."
      new-azurermresourcegroupdeployment -verbose -name $rgname -resourcegroupname $rgname -templatefile $template `
                                         -virtualMachineName $rgname -virtualMachineSize $vmsize -storageType $storageType `
-                                        -dataDiskSize $disksize -adminPassword $secret -Location $location
+                                        -dataDiskSize $disksize -adminPassword $secret -Location $location 
 } 
 else
 {
