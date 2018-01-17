@@ -1,4 +1,5 @@
 Get-AzSStorageAcquisition `
-  | select AcquisitionId, TenantSubscriptionId, StorageAccountName, Container, `
+  | select AcquisitionId,  @{Name="Volume";Expression={$_.FilePath.substring(18,8)}}, TenantSubscriptionId, StorageAccountName, Container, `
     Blob, Status, MaximumBlobSize, FilePath `
+  | sort Volume `
   | format-table -AutoSize
