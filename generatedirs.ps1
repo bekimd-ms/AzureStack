@@ -1,3 +1,7 @@
+Param(
+  [string]$VolumeName=""
+)
+
 $chars = [char[]] ([char]'0'..[char]'9' + [char]'a'..[char]'z')
 $chars = $chars * 30
 $targetratio = (get-random -min 2 -max 8)/10
@@ -5,14 +9,13 @@ Write-Host "Target ratio ", $targetratio
 
 function GetFreeRatio
 {
-  $volume = get-volume -DriveLetter F
+  $volume = get-volume -DriveLetter $VolumeName
   $ratio = $volume.SizeRemaining / $volume.Size 
   $ratio
 }
 
 function GenerateContent
 {
-
    $content = -join(Get-Random $chars -Count 512)
 
    for($i=1; $i -lt 512; $i++)
