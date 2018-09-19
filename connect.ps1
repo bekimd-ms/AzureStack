@@ -1,4 +1,4 @@
-Import-Module AzureRM -RequiredVersion 2.1.2
+Import-Module AzureRM -RequiredVersion 2.3.0
 #Import-Module .\AzureStack-Tools\Connect\AzureStack.Connect.psm1
 
 $environment = $env:LOCATION
