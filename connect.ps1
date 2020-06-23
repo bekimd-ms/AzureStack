@@ -1,5 +1,4 @@
-Import-Module AzureRM -RequiredVersion 2.3.0
-#Import-Module .\AzureStack-Tools\Connect\AzureStack.Connect.psm1
+Import-Module AzureRM -RequiredVersion 2.5.0
 
 $environment = ( $env:LOCATION + $env:ENDPOINT )
 $endpoint = "https://" + $env:ENDPOINT + "management." + $env:LOCATION + "." + $env:DNS

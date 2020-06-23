@@ -6,7 +6,7 @@ Param(
 
 function global:prompt { Write-Host ("[ $SubscriptionName@$EnvironmentName ] >") -nonewline -foregroundcolor Yellow; return " " }
 
-Import-Module AzureRM -RequiredVersion 2.3.0
+Import-Module AzureRM -MaximumVersion 2.9.9
 
 
 $context = get-azurermcontext -listAvailable `
